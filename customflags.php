@@ -24,7 +24,7 @@ class customflags extends Module
 
         $this->name = 'customflags';
         $this->tab = 'pricing_promotion';
-        $this->version = '1.0.0';
+        $this->version = '1.0.1';
         $this->author = 'Michał Przysiężny';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = [
@@ -35,9 +35,9 @@ class customflags extends Module
 
         parent::__construct();
 
-        $this->displayName = $this->trans('Custom Flags', [], 'Modules.CustomFlags.Admin');
-        $this->description = $this->trans('Add custom flags to your products.', [], 'Modules.CustomFlags.Admin');
-        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall?', [], 'Modules.CustomFlags.Admin');
+        $this->displayName = $this->trans('Custom Flags', [], 'Modules.Customflags.Customflags');
+        $this->description = $this->trans('Add custom flags to your products.', [], 'Modules.Customflags.Customflags');
+        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall?', [], 'Modules.Customflags.Customflags');
     }
 
     public function install()
@@ -118,7 +118,7 @@ class customflags extends Module
             $condition = Tools::getValue('flag_condition_enabled');
 
             if (empty($flagName)) {
-                $output .= $this->displayError($this->l('Invalid flag name.'));
+                $output .= $this->displayError($this->trans('Invalid flag name.', [], 'Modules.Customflags.Customflags'));
             } else {
                 $flag = new CustomFlag();
                 $flag->name = $flagName;
@@ -129,10 +129,10 @@ class customflags extends Module
                     $conditionMode = Tools::getValue('flag_condition_mode');
                     $conditionOperator = Tools::getValue('flag_condition_operator');
                     if (!in_array($conditionMode, $conditionAvaliableMode)) {
-                        $output .= $this->displayError($this->l('Invalid condition mode.'));
+                        $output .= $this->displayError($this->trans('Invalid condition mode.', [], 'Modules.Customflags.Customflags'));
                         $error = true;
                     } elseif (!in_array($conditionOperator, $conditionAvaliableOperator)) {
-                        $output .= $this->displayError($this->l('Invalid condition operator.'));
+                        $output .= $this->displayError($this->trans('Invalid condition operator.', [], 'Modules.Customflags.Customflags'));
                         $error = true;
                     } else {
                         $flag->condition = $conditionMode . " " . $conditionOperator . " " . (int)Tools::getValue('flag_condition_value');
@@ -141,9 +141,9 @@ class customflags extends Module
 
                 if (!$error) {
                     if ($flag->add()) {
-                        $output .= $this->displayConfirmation($this->l('Flag has been successfully added.'));
+                        $output .= $this->displayConfirmation($this->trans('Flag has been successfully added.', [], 'Modules.Customflags.Customflags'));
                     } else {
-                        $output .= $this->displayError($this->l('An error occurred while adding the flag.'));
+                        $output .= $this->displayError($this->trans('An error occurred while adding the flag.', [], 'Modules.Customflags.Customflags'));
                     }
                 }
             }
@@ -159,7 +159,7 @@ class customflags extends Module
             $condition = Tools::getValue('flag_condition_enabled');
 
             if (empty($flagName)) {
-                $output .= $this->displayError($this->l('Invalid flag name.'));
+                $output .= $this->displayError($this->trans('Invalid flag name.', [], 'Modules.Customflags.Customflags'));
             } else {
                 $flag = new CustomFlag();
                 $flag->id_flag = $idFlag;
@@ -172,10 +172,10 @@ class customflags extends Module
                     $conditionMode = Tools::getValue('flag_condition_mode');
                     $conditionOperator = Tools::getValue('flag_condition_operator');
                     if (!in_array($conditionMode, $conditionAvaliableMode)) {
-                        $output .= $this->displayError($this->l('Invalid condition mode.'));
+                        $output .= $this->displayError($this->trans('Invalid condition mode.', [], 'Modules.Customflags.Customflags'));
                         $error = true;
                     } elseif (!in_array($conditionOperator, $conditionAvaliableOperator)) {
-                        $output .= $this->displayError($this->l('Invalid condition operator.'));
+                        $output .= $this->displayError($this->trans('Invalid condition operator.', [], 'Modules.Customflags.Customflags'));
                         $error = true;
                     } else {
                         $flag->condition = $conditionMode . " " . $conditionOperator . " " . (int)Tools::getValue('flag_condition_value');
@@ -184,9 +184,9 @@ class customflags extends Module
 
                 if (!$error) {
                     if ($flag->updateFlag($flag->id_flag, $flag->name, $flag->condition)) {
-                        $output .= $this->displayConfirmation($this->l('Flag has been successfully updated.'));
+                        $output .= $this->displayConfirmation($this->trans('Flag has been successfully updated.', [], 'Modules.Customflags.Customflags'));
                     } else {
-                        $output .= $this->displayError($this->l('An error occurred while updating the flag.'));
+                        $output .= $this->displayError($this->trans('An error occurred while updating the flag.', [], 'Modules.Customflags.Customflags'));
                     }
                 }
             }
@@ -200,12 +200,12 @@ class customflags extends Module
             $flag = new CustomFlag();
 
             if (!$flag->getFlag($idFlag)) {
-                $output .= $this->displayError($this->l('Flag does not exist.'));
+                $output .= $this->displayError($this->trans('Flag does not exist.', [], 'Modules.Customflags.Customflags'));
             } else {
                 if ($flag->removeFlag($idFlag)) {
-                    $output .= $this->displayConfirmation($this->l('Flag has been successfully deleted.'));
+                    $output .= $this->displayConfirmation($this->trans('Flag has been successfully deleted.', [], 'Modules.Customflags.Customflags'));
                 } else {
-                    $output .= $this->displayError($this->l('An error occurred while deleting the flag.'));
+                    $output .= $this->displayError($this->trans('An error occurred while deleting the flag.', [], 'Modules.Customflags.Customflags'));
                 }
             }
         }
@@ -218,12 +218,12 @@ class customflags extends Module
 
             $flag = new CustomFlag();
             if (!$flag->getFlag($idFlag)) {
-                $output .= $this->displayError($this->l('Flag does not exist.'));
+                $output .= $this->displayError($this->trans('Flag does not exist.', [], 'Modules.Customflags.Customflags'));
             } else {
                 if ($flag->updateFlagGlobal($idFlag, false)) {
-                    $output .= $this->displayConfirmation($this->l('Flag has been successfully unset as global.'));
+                    $output .= $this->displayConfirmation($this->trans('Flag has been successfully unset as global.', [], 'Modules.Customflags.Customflags'));
                 } else {
-                    $output .= $this->displayError($this->l('An error occurred while unsetting the flag as global.'));
+                    $output .= $this->displayError($this->trans('An error occurred while unsetting the flag as global.', [], 'Modules.Customflags.Customflags'));
                 }
             }
         }
@@ -236,12 +236,12 @@ class customflags extends Module
 
             $flag = new CustomFlag();
             if (!$flag->getFlag($idFlag)) {
-                $output .= $this->displayError($this->l('Flag does not exist.'));
+                $output .= $this->displayError($this->trans('Flag does not exist.', [], 'Modules.Customflags.Customflags'));
             } else {
                 if ($flag->updateFlagGlobal($idFlag, true)) {
-                    $output .= $this->displayConfirmation($this->l('Flag has been successfully set as global.'));
+                    $output .= $this->displayConfirmation($this->trans('Flag has been successfully set as global.', [], 'Modules.Customflags.Customflags'));
                 } else {
-                    $output .= $this->displayError($this->l('An error occurred while setting the flag as global.'));
+                    $output .= $this->displayError($this->trans('An error occurred while setting the flag as global.', [], 'Modules.Customflags.Customflags'));
                 }
             }
         }
@@ -273,7 +273,7 @@ class customflags extends Module
         }
 
         $formBuilder->add('custom_flags', ChoiceType::class, [
-            'label' => $this->l('Choose custom flags'),
+            'label' => $this->trans('Choose custom flags', [], 'Modules.Customflags.Customflags'),
             'choices' => $choices,
             'required' => false,
             'multiple' => true,
@@ -331,13 +331,13 @@ class customflags extends Module
                 if ($customFlag['condition'] != null) {
                     if (CustomFlag::checkIfCondition($customFlag['condition'], $productCount)) {
                         $flags[] = [
-                            'type' => 'custom-global',
+                            'type' => 'custom',
                             'label' => $customFlag['name'],
                         ];
                     }
                 } else {
                     $flags[] = [
-                        'type' => 'custom-global',
+                        'type' => 'custom',
                         'label' => $customFlag['name'],
                     ];
                 }
@@ -383,13 +383,13 @@ class customflags extends Module
                             if ($categoryFlag['condition'] != null) {
                                 if (CustomFlag::checkIfCondition($categoryFlag['condition'], $productCount)) {
                                     $flags[] = [
-                                        'type' => 'custom-category',
+                                        'type' => 'custom',
                                         'label' => $categoryFlag['name'],
                                     ];
                                 }
                             } else {
                                 $flags[] = [
-                                    'type' => 'custom-category',
+                                    'type' => 'custom',
                                     'label' => $categoryFlag['name'],
                                 ];
                             }
@@ -402,7 +402,18 @@ class customflags extends Module
         /**
          * Remove duplicates from flags array
          */
-        $flags = array_map("unserialize", array_unique(array_map("serialize", $flags)));
+        $customFlags = array_filter($flags, function ($item) {
+            return isset($item['type']) && $item['type'] === 'custom';
+        });
+        
+        $uniqueCustomFlags = array_unique($customFlags, SORT_REGULAR);
+        $flags = array_merge(
+            array_filter($flags, function ($item) {
+                return !(isset($item['type']) && $item['type'] === 'custom');
+            }),
+            $uniqueCustomFlags
+        );
+
     }
 
     /**
@@ -430,7 +441,7 @@ class customflags extends Module
         }
 
         $formBuilder->add('custom_flags', ChoiceType::class, [
-            'label' => $this->l('Choose custom flags'),
+            'label' => $this->trans('Choose custom flags', [], 'Modules.Customflags.Customflags'),
             'choices' => $choices,
             'required' => false,
             'multiple' => true,
