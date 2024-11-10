@@ -42,7 +42,12 @@ Moduł rejestruje następujące hooki w systemie PrestaShop:
    - Obsługuje zapisanie przypisanych flag podczas dodawania nowej kategorii.
 
 8. **`actionCategoryDelete`**
+
    - Usuwa wszystkie flagi przypisane do kategorii po jej usunięciu.
+
+9. **`actionProductFlagsModifier`**
+
+   - Hook odpowiedzialny za wyświetlanie flag przy produkcie. Zastosowałem tutaj referencje do `&$params['flags']` który przechowuje flagi jakie ma produkt, aby bezpośrednio modyfikować tablicę z flagami jaka znajduje przypisana do produktu. Dzięki czemu styl flag jest taki sam jak jest ustawiony w stylu sklepu z domyślnymi flagami jak np. "Nowość".
 
 ## Główne funkcje
 
