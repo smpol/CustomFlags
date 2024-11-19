@@ -131,7 +131,7 @@ php-cs-fixer
 
 # Translations and emails templates
 
-translations/*
+# translations/*
 mails/*
 !mails/themes/
 !mails/_partials/
