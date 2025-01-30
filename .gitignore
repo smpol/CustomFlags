@@ -173,3 +173,5 @@ themes/default-bootstrap/modules/*/mails/*
 
 .idea/workspace.xml
 .idea/
+
+.DS_Store
